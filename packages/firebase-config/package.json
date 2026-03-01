@@ -12,9 +12,14 @@
     "lint": "eslint src/"
   },
   "dependencies": {
+    "@loretto/shared-types": "*",
     "firebase": "^11"
   },
+  "peerDependencies": {
+    "react": "^18 || ^19"
+  },
   "devDependencies": {
+    "@types/react": "^19",
     "@loretto/eslint-config": "*",
     "@loretto/typescript-config": "*",
     "eslint": "^9",

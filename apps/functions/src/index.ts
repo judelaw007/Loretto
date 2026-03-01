@@ -1,5 +1,4 @@
-import { onRequest } from "firebase-functions/v2/https";
-
-export const healthCheck = onRequest((req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
-});
+export { healthCheck } from "./health";
+export { onUserDocumentCreate } from "./auth/on-user-create";
+export { setCustomClaims } from "./auth/set-custom-claims";
+export { createUserAccount } from "./auth/create-user-account";

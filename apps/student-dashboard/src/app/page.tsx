@@ -1,11 +1,23 @@
+"use client";
+
+import { useEffect } from "react";
+import { useAuthContext } from "@loretto/firebase-config";
+
 export default function Home() {
+  const { firebaseUser, loading } = useAuthContext();
+
+  useEffect(() => {
+    if (loading) return;
+    if (firebaseUser) {
+      window.location.href = "/dashboard";
+    } else {
+      window.location.href = "/login";
+    }
+  }, [firebaseUser, loading]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <h1 className="text-4xl font-bold mb-4">Loretto Student Dashboard</h1>
-      <p className="text-lg text-gray-600">
-        Assessments, CBTs &amp; E-Library
-      </p>
-      <p className="mt-8 text-sm text-gray-400">Phase 1 — Foundation</p>
+    <main className="flex min-h-screen items-center justify-center">
+      <p className="text-gray-500">Loading...</p>
     </main>
   );
 }

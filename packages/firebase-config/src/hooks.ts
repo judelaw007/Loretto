@@ -1,16 +1,7 @@
-// Placeholder hooks — will be implemented in Phase 2 (Auth)
-
-export function useAuth() {
-  // TODO: Implement auth state listener
-  return {
-    user: null,
-    loading: true,
-    error: null,
-  };
-}
+export { useAuthContext as useAuth } from "./auth-context";
 
 export function useModules() {
-  // TODO: Implement module resolution based on user role and assignments
+  // TODO: Implement module resolution based on user role and assignments (Phase 4)
   return {
     modules: [],
     loading: true,

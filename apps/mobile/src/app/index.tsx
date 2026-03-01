@@ -1,11 +1,10 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, ActivityIndicator, StyleSheet } from "react-native";
 
-export default function Home() {
+export default function Index() {
+  // AuthGate in _layout.tsx handles routing to (auth) or (app)
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Loretto</Text>
-      <Text style={styles.subtitle}>Parent Mobile App</Text>
-      <Text style={styles.phase}>Phase 1 — Foundation</Text>
+      <ActivityIndicator size="large" color="#3b82f6" />
     </View>
   );
 }
@@ -15,20 +14,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 32,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 18,
-    color: "#666",
-  },
-  phase: {
-    marginTop: 32,
-    fontSize: 14,
-    color: "#aaa",
   },
 });

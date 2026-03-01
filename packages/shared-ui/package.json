@@ -11,6 +11,10 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint src/"
   },
+  "dependencies": {
+    "@loretto/firebase-config": "*",
+    "@loretto/shared-types": "*"
+  },
   "peerDependencies": {
     "react": "^18 || ^19"
   },
