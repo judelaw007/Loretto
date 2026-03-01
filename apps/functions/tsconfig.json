@@ -1,0 +1,8 @@
+{
+  "extends": "@loretto/typescript-config/functions.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"]
+}

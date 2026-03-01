@@ -1,0 +1,7 @@
+{
+  "extends": "@loretto/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}

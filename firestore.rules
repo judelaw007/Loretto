@@ -1,0 +1,72 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: check if user is authenticated
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    // Helper: get user's role from custom claims
+    function getRole() {
+      return request.auth.token.role;
+    }
+
+    // Helper: check if user is super admin
+    function isSuperAdmin() {
+      return isAuth() && getRole() == 'super_admin';
+    }
+
+    // Schools — super admin full access, others read their own schools
+    match /schools/{schoolId} {
+      allow read: if isAuth() && (
+        isSuperAdmin() ||
+        schoolId in request.auth.token.schoolIds
+      );
+      allow write: if isSuperAdmin();
+
+      match /announcements/{announcementId} {
+        allow read: if isAuth() && (
+          isSuperAdmin() ||
+          schoolId in request.auth.token.schoolIds
+        );
+        allow write: if isAuth() && getRole() in ['super_admin', 'admin'];
+      }
+    }
+
+    // Users — super admin full access, users read own profile
+    match /users/{userId} {
+      allow read: if isAuth() && (
+        isSuperAdmin() ||
+        request.auth.uid == userId
+      );
+      allow write: if isSuperAdmin();
+
+      match /notifications/{notificationId} {
+        allow read: if isAuth() && request.auth.uid == userId;
+        allow write: if false; // Only Cloud Functions write notifications
+      }
+    }
+
+    // Applications — parents create, admins read/update
+    match /applications/{applicationId} {
+      allow create: if true; // Public application form
+      allow read: if isAuth() && getRole() in ['super_admin', 'admin'];
+      allow update: if isAuth() && getRole() in ['super_admin', 'admin'];
+      allow delete: if isSuperAdmin();
+    }
+
+    // Modules — super admin manages, all authenticated users read
+    match /modules/{moduleId} {
+      allow read: if isAuth();
+      allow write: if isSuperAdmin();
+    }
+
+    // Feature Assignments — super admin manages, all authenticated users read
+    match /featureAssignments/{assignmentId} {
+      allow read: if isAuth();
+      allow write: if isSuperAdmin();
+    }
+  }
+}

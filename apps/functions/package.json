@@ -1,0 +1,27 @@
+{
+  "name": "@loretto/functions",
+  "version": "0.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src/",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@loretto/shared-types": "*",
+    "firebase-admin": "^13",
+    "firebase-functions": "^6"
+  },
+  "devDependencies": {
+    "@loretto/eslint-config": "*",
+    "@loretto/typescript-config": "*",
+    "eslint": "^9",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

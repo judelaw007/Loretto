@@ -1,0 +1,25 @@
+{
+  "name": "@loretto/shared-ui",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "exports": {
+    ".": "./src/index.tsx"
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src/"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19"
+  },
+  "devDependencies": {
+    "@loretto/eslint-config": "*",
+    "@loretto/typescript-config": "*",
+    "@types/react": "^19",
+    "eslint": "^9",
+    "react": "^19",
+    "typescript": "^5"
+  }
+}
