@@ -122,11 +122,86 @@ async function seed() {
   });
   console.log("Created school: school-main");
 
+  // Create sample applications
+  const sampleApplications = [
+    {
+      parentName: "Mrs. Chidinma Okafor",
+      parentEmail: "chidinma.okafor@example.com",
+      parentPhone: "+2348012345678",
+      schoolId: "school-main",
+      status: "pending",
+      children: [
+        {
+          firstName: "Chukwuemeka",
+          lastName: "Okafor",
+          dateOfBirth: "2019-03-15",
+          gender: "male",
+          previousSchool: "Bright Stars Nursery",
+          classAppliedFor: "Primary 1",
+        },
+        {
+          firstName: "Adaeze",
+          lastName: "Okafor",
+          dateOfBirth: "2021-07-22",
+          gender: "female",
+          classAppliedFor: "Nursery 2",
+        },
+      ],
+      createdAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
+    },
+    {
+      parentName: "Mr. Babatunde Afolabi",
+      parentEmail: "babatunde.afolabi@example.com",
+      parentPhone: "+2348098765432",
+      schoolId: "school-main",
+      status: "under_review",
+      reviewNotes: "Documents verified. Awaiting final decision.",
+      reviewedBy: "Super Admin",
+      children: [
+        {
+          firstName: "Oluwatobi",
+          lastName: "Afolabi",
+          dateOfBirth: "2020-11-08",
+          gender: "male",
+          previousSchool: "Little Angels Academy",
+          classAppliedFor: "Nursery 3",
+        },
+      ],
+      createdAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
+    },
+    {
+      parentName: "Mrs. Ngozi Eze",
+      parentEmail: "ngozi.eze@example.com",
+      parentPhone: "+2348055551234",
+      schoolId: "school-main",
+      status: "pending",
+      children: [
+        {
+          firstName: "Somtochukwu",
+          lastName: "Eze",
+          dateOfBirth: "2018-01-20",
+          gender: "male",
+          classAppliedFor: "Primary 2",
+        },
+      ],
+      createdAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
+    },
+  ];
+
+  for (const app of sampleApplications) {
+    const ref = await db.collection("applications").add(app);
+    console.log(`Created application: ${app.parentName} (${ref.id}) — ${app.status}`);
+  }
+
   console.log("\nSeed complete! Test credentials:");
   console.log("  Super Admin:  superadmin@loretto.test / password123");
   console.log("  Teacher:      teacher@loretto.test / password123");
   console.log("  Parent:       parent@loretto.test / password123");
   console.log("  Student:      student@loretto.test / password123");
+  console.log("\nSample applications created (pending + under_review)");
 }
 
 seed().catch(console.error);

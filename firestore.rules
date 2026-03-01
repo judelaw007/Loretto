@@ -18,12 +18,9 @@ service cloud.firestore {
       return isAuth() && getRole() == 'super_admin';
     }
 
-    // Schools — super admin full access, others read their own schools
+    // Schools — publicly readable (names/addresses), super admin writes
     match /schools/{schoolId} {
-      allow read: if isAuth() && (
-        isSuperAdmin() ||
-        schoolId in request.auth.token.schoolIds
-      );
+      allow read: if true;
       allow write: if isSuperAdmin();
 
       match /announcements/{announcementId} {

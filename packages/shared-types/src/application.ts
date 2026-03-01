@@ -6,6 +6,25 @@ export type ApplicationStatus =
   | "approved"
   | "rejected";
 
+/** Form input type for the public application form (no id/timestamps) */
+export interface ApplicationFormChild {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  gender: string;
+  previousSchool?: string;
+  classAppliedFor: string;
+}
+
+/** Form input type submitted by the parent (converted to Application on write) */
+export interface ApplicationFormData {
+  parentName: string;
+  parentEmail: string;
+  parentPhone: string;
+  schoolId: string;
+  children: ApplicationFormChild[];
+}
+
 export interface Application {
   id: string;
   parentName: string;
